@@ -1,0 +1,171 @@
+<html>
+<head>
+			<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+		    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+		    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			
+			<script src="reg.js" ></script>
+			<link rel="stylesheet" href="reg.css">
+	<style>
+        input.ng-invalid.ng-dirty{border: 1px; solid:red;}
+    </style>
+</head>
+
+<body  ng-app="myApp">
+ <div class="container">
+   <div id="signup">
+      <div class="signup-screen">
+         <div class="space-bot text-center">
+            <h1>Sign up</h1>
+           <div class="divider"></div>
+         </div>
+           <form class="form-register" method="post" name="register">
+	            
+				<div class="input-field col s8">
+              <input id="name" 
+			  type="text"  
+			  name="name" 
+			  class="validate"  
+			  required>
+              <label for="name">Name</label>
+            </div>
+			
+			 <div class="input-field col s8">
+              <input id="surname" 
+			  type="text" 
+			  name="last-name" 
+			  class="validate" 
+			  required>
+              <label for="surname">Surname</label>
+             </div>
+			 
+			 <div class="input-field col s8" >
+			 <input id="year" 
+			 type="text" 
+			 name="year" 
+			 class="validate"  
+			 required>
+			 <label for="year">Date of birth</label>
+             </div>
+			 
+			 <div class="input-field col s8">
+              <input id="email" 
+			  type="email" 
+			  name="email" 
+			  ng-model="email" 
+			  class="validate" 
+			  required>
+              <label for="email">Email</label>
+             <p class="alert alert-danger" ng-show="form-register.email.$error.email">Your email is invalid.</p>
+			 </div>
+			 
+			 <div ng-controller="RegisterCtrl">
+			 <div class="input-field col s8">
+               <input id="password" 
+			   type="password" 
+			   name="password" 
+			   ng-model="password" 
+			   ng-minlength='6' 
+			   class="validate" 
+			   required
+				ng-init="password_error_show = 0"
+				ng-focus="password_error_show = 1"
+				ng-change="password_error_show = password_error_show + 1;changepassword()"
+				required>
+               <label for="password">Password</label>
+             
+			  <p class="alert alert-danger" ng-show="!passValidation && password_error_show > 0">
+			   Password must be alphanumeric, 1 lower & upper letter & 1 special character(!@#$%^&*).
+				Password length must be between 8-13
+				</p>
+			 </div>
+           
+				
+			<div class="input-field col s8">
+               <input id="cpassword" 
+			   type="password" 
+			   name="cpassword" 
+			   ng-model="cpassword" 
+			   class="validate" 
+			   required
+			   ng-init="cpassword_error_show = 0"
+				ng-focus="cpassword_error_show = 1"
+				ng-change="cpassword_error_show = cpassword_error_show + 1;changepassword()">
+				<label for="password">Confirm Password</label>
+			    <p class="alert alert-danger" ng-show="cpassword_error_show > 0 && password !== cpassword"> Password mismatch</p>
+			</div>
+			</div>
+			 
+			 <div class="input-field col s8">
+			 <input id="number"
+			 type="number" 
+			name="number"
+			ng-model="mobileno"
+			required
+			class="validate"
+			ng-maxlength="10"
+			ng-minlength="10"/>
+			<label for="phnno">Phone Number</label>
+			<p class="alert alert-danger" ng-show="register.number.$dirty && register.number.$error.minlength">please enter 10 numbers</p>
+			<p class="alert alert-danger" ng-show="register.number.$dirty && register.number.$error.maxlength">do not enter more than 10 numbers</p>
+			</div>
+			
+			
+			<div class="input-field col s8">
+			 <input id="adh_no"
+			 type="number" 
+			name="adh_no"
+			ng-model="adh_no"
+			required
+			class="validate"
+			ng-maxlength="12"
+			ng-minlength="12"/>
+			<label for="phnno">Aadhar Number</label>
+			<p class="alert alert-danger" ng-show="register.adh_no.$dirty && register.adh_no.$error.minlength">please enter 12 numbers</p>
+			<p class="alert alert-danger" ng-show="register.adh_no.$dirty && register.adh_no.$error.maxlength">do not enter more than 12 numbers</p>
+			</div>
+			
+			<div ng-controller="test1">
+			<div class="input-field col s8">
+			<input type="text" 
+			name="pan"
+			ng-model="pan"
+			required
+			class="validate"
+			ng-init="pan_error_show = 0"
+			ng-focus="pan_error_show = 1"
+			ng-change="pan_error_show = pan_error_show + 1;changepan()">
+			<label for="pan">PAN Number</label>
+			<p class="alert alert-danger" ng-show="!panValidation && pan_error_show > 0">
+				please enter valid PAN number
+				</p>
+			</div>
+			</div>
+			
+			  <div class="space-top text-center">
+               <button type="submit" class="waves-effect waves-light btn done">
+               <i class="material-icons left">Submit</i> 
+               </button>
+               <button type="reset" class="waves-effect waves-light btn cancel">
+               <i class="material-icons left">Reset</i>
+               </button>
+              </div>
+             </form>
+           </div>
+        </div>
+    </div>
+</body>
+</html>
+			  
+			  
+			  
+			  
+			  
+			  
+			  
